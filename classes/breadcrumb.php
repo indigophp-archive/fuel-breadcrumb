@@ -13,6 +13,7 @@ class Breadcrumb {
     protected static $breadcrumb = array();
     protected static $auto_render = true;
     protected static $use_lang = false;
+    protected static $active_link = true;
     protected static $home = array('name' => 'Home', 'link' => '/');
     protected static $template = array(
 	'wrapper_start' => '<ul class="breadcrumb">',
@@ -123,7 +124,7 @@ class Breadcrumb {
      * @return string The html
      */
     public static function create_links() {
-	if (empty(static::$breadcrumb) or count(static::$breadcrumb) < 2) {
+	if (empty(static::$breadcrumb)) {
 	    return '';
 	}
 
@@ -135,7 +136,7 @@ class Breadcrumb {
 	    $is_last = ($i === $total - 1);
 
 	    $output .= ($is_last) ? $template["item_start_active"] : $template["item_start"];
-	    $output .= ($is_last) ? static::$breadcrumb[$i]["title"] : \Html::anchor(static::$breadcrumb[$i]["link"], static::$breadcrumb[$i]["title"]);
+	    $output .= ($is_last and !\Config::get('breadcrumb.active_link', static::$active_link)) ? static::$breadcrumb[$i]["title"] : \Html::anchor(static::$breadcrumb[$i]["link"], static::$breadcrumb[$i]["title"]);
 	    $output .= ($is_last) ? "" : $template["divider"];
 	    $output .= $template["item_end"];
 	}

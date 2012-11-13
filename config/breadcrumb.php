@@ -10,12 +10,16 @@ return array(
     /**
      * Auto Populate Breadcrumb based on routes
      */
-    'auto_populate' => false,
+    'auto_render' => false,
     /**
      * If true the class will call ONLY ON AUTO POPULATING Lang::get() to each item
      * of breadcrumb and WILL NOT ucwords and replace underscores to spaces
      */
     'use_lang' => false,
+    /**
+     * Active page is a link
+     */
+    'active_link' => true,
     /**
      * Home Link
      */
